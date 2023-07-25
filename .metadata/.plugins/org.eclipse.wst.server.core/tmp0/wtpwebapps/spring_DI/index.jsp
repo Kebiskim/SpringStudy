@@ -42,7 +42,7 @@
 		out.println("<h2>" + msg + "</h2>");
 				
 		
-		// HelloImpl 생성자 부분이 중간에 생성됨. (다 끝나고가 아니라..) => xml 파일 잘못하면 톰캣 실행할 때 오류가 나서 안됨!
+		// HelloImpl 생성자 부분이 중간에 생성됨. (다 끝나고가 아니라..) => xml 파일 세팅 잘못하면 톰캣 실행할 때부터 오류가 나서 안됨!!
 		
 		MyCalc mc = (MyCalc) context.getBean("mycalc");
 		int result = mc.plus(10, 20);
@@ -53,6 +53,7 @@
 		mc.minus(10, 20);
 		int result2 = mc.getResult();
 		out.println("<h2> 결과 : 10 - 20 = " + mc.getResult() + "</h2>");
+		// PageContext가 아님!!
 		pageContext.setAttribute("result2", result2);
 		
 		MyCalc2 mc2 = (MyCalc2) context.getBean("myCalc2");

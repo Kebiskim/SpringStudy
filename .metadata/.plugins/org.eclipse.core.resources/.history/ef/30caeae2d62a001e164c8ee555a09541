@@ -1,0 +1,18 @@
+package ex05_Annotation;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class TestMain {
+	public static void main(String[] args) {
+		ApplicationContext context =
+				new GenericXmlApplicationContext("ex05_Annotation/config.xml");
+		
+		// 아래 sic처럼 id가 없으면 nullPointerException 나온다!!
+		// @Type을 통한 주입
+
+@Autowired는 주로 타입(Type)을 이용해 주입합니다. @Autowired 가 Type으로 찾아서 주입하므로 동일한 Bean 타입의 객체가 여러개 있을 경우, Bean을 찾기 위해 @Qualifier 어노테이션을 같이 사용해야 합니다. 
+		Service service = (Service) context.getBean("sic");
+		service.biz();
+	}
+}

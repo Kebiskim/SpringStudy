@@ -12,12 +12,13 @@ public class MyProcess {
 		this.name = name;
 		this.age = age;
 	}
-	
+		
 	// 실행하고 싶은 메서드
 	public void prn() {
 		System.out.println("이름 : " + name);
 		System.out.println("나이 : " + age);
 	}
+
 
 	public String getName() {
 		return name;

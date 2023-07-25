@@ -1,14 +1,11 @@
 package ex02_DI;
 
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Service {
-	
+	// Service에서 DAO를 생성해서 보냄.
+	// Service의 역할은 Dao가 DB에서 받아온 데이터를 전달받아 가공하는 것이다.
 	private DAO dao;
 	private String name;
 	private int age;

@@ -10,8 +10,8 @@
 	<bean id="mycalc" class="ex07_web_DI.MyCalc" /> -->
 	
 	<context:annotation-config />
- 	<context:component-scan base-package="ex06_web_DI"></context:component-scan>
- 	<context:component-scan base-package="ex07_web_DI"></context:component-scan>
- 	<context:component-scan base-package="ex08_web_annotation"></context:component-scan>
+ 	<context:component-scan base-package="ex06_web_DI" />
+ 	<context:component-scan base-package="ex07_web_DI" />
+ 	<context:component-scan base-package="ex08_web_annotation" />
 	<!-- <context:component-scan base-package="/"></context:component-scan> -->
 </beans>

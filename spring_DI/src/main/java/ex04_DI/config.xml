@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- 아래에서 age를 사용하기 위해서 bean 해줌 -->
 	<bean id="age" class="ex04_DI.Age" />
 	
 	<bean id="mp1" class="ex04_DI.MyProcess">

@@ -3,32 +3,17 @@ package ex01_nonDI;
 public class TestMain {
 	public static void main(String[] args) {
 		// 방법 1
-		
-		OracleDAO oracleDAO = new OracleDAO();
-		MySQLDAO mySQLDAO = new MySQLDAO();
-		
-		// 실제 실행하고자 하는 메서드
-		public void biz() {
-			oracleDAO.prn();
-			// mySQLDAO.prn();
-		}
+		// Service service = new Service();
+		// service.biz();
 		
 		// 방법 2
-		// 클래스 자료형으로 활용
-		private DAO dao;
-		public Service() {}
-		
-		// 생성자를 이용해서
-		public Service(DAO dao) {
-			this.dao = dao;
-		}
-		
-		// setter를 이용
-		public void setDao(DAO dao) {
-			this.dao = dao;
-		}
-		
-		Service service = new Service();
+		// 생성자 이용
+		Service service = new Service(new OracleDAO());
 		service.biz();
+		
+		// setter 이용
+		Service service2 = new Service();
+		service2.setDao(new MySQLDAO());
+		service2.biz();
 	}
 }

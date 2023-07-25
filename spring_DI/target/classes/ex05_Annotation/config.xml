@@ -26,15 +26,12 @@
 	 
 	<!-- 
 	@Autowired : 변수 이름과 참조되는 클래스의 아이디가 같아야 한다!
-	<bean id="oracleDAO" class="ex02_DI.OracleDAO" />
-	
+	<bean id="oracleDAO" class="ex02_DI.OracleDAO" />	
 	
 	<bean id="dao" class="ex02_DI.OracleDAO" />
 	<bean id="mysqlDAO" class="ex02_DI.MySQLDAO" />
 	<bean id="service" class="ex02_DI.Service">
 	 	<property name="dao" ref="dao" />
 	</bean>
-	 
 	-->
-	 
 </beans>
