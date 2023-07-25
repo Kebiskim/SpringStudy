@@ -1,0 +1,73 @@
+<%@page import="ex08_web_annotation.MyCalc2"%>
+<%@page import="ex07_web_DI.MyCalc"%>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.springframework.web.context.WebApplicationContext"%>
+<%@page import="ex06_web_DI.HelloImpl"%>
+<%@page import="org.springframework.context.support.GenericXmlApplicationContext"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%--
+		// 자바 main에서 사용한 내용 그대로 코딩
+		// 아래 설정파일 ApplicationContext 은 웹에서는 사용 안함!
+		// 이렇게 써도 되는데 안쓰는 것이 나음!! (*욕먹는다)
+		ApplicationContext context = 
+			new GenericXmlApplicationContext("ex06_web_DI/config.xml");
+		HelloImpl hello = (HelloImpl) context.getBean("hello");
+		String msg = hello.sayHello();
+		out.println("<h2>" + msg + "</h2>");
+		
+		// org.springframework.beans.factory.BeanDefinitionStoreException: IOException parsing XML document from ServletContext resource [/WEB-INF/applicationContext.xml]; 
+		// nested exception is java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/applicationContext.xml]
+		// 에러 => web.xml에서 context-param 주석 해제
+	--%>
+	
+	<%
+		// config.xml => 환경설정 파일 => web에서는 root-context가 그 역할을 함! 웹에서는 config.xml 대신 그거 씀. 
+		// => ☆ root-context는, 이름이 application 이라고 정해져 있음! (기본적으로 아래와 똑같이 사용함)
+		// root-context가 컨테이너에 내용을 전달함.
+		
+		WebApplicationContext context = 
+		WebApplicationContextUtils.getWebApplicationContext(application);
+		
+		HelloImpl hello = (HelloImpl) context.getBean("hello");
+		String msg = hello.sayHello();
+		out.println("<h2>" + msg + "</h2>");
+				
+		
+		// HelloImpl 생성자 부분이 중간에 생성됨. (다 끝나고가 아니라..) => xml 파일 잘못하면 톰캣 실행할 때 오류가 나서 안됨!
+		
+		MyCalc mc = (MyCalc) context.getBean("mycalc");
+		int result = mc.plus(10, 20);
+		out.println("<h2> 결과 : 10 + 20 = " + result + "</h2>");
+		// EL을 사용할 때는 아래와 같이 미리 attribute를 설정해줘야 함!
+		pageContext.setAttribute("result", result);
+		
+		mc.minus(10, 20);
+		int result2 = mc.getResult();
+		out.println("<h2> 결과 : 10 - 20 = " + mc.getResult() + "</h2>");
+		pageContext.setAttribute("result2", result2);
+		
+		MyCalc2 mc2 = (MyCalc2) context.getBean("myCalc2");
+		int result3 = mc2.mul(10, 20);
+		out.println("<h2> 결과 : 10 * 20 = " + result3 + "</h2>");
+		pageContext.setAttribute("result3", result3);
+	%>
+	<hr>
+	
+	<!-- EL 을 쓸 때는 네군데 저장해야 한다! 안하면 안나옴 -->
+	<h2>결과 : 10 + 20 = ${result}</h2>
+	<h2>결과 : 10 - 20 = ${result2}</h2>
+</body>
+</html>
+
+
+
+

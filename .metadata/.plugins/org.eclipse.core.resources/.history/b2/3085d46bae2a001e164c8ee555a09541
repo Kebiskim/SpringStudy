@@ -1,0 +1,22 @@
+package ex04_DI;
+
+public class MyProcess {
+	private String name;
+	private String jumin;
+	private String gender;
+	private Age age;
+	
+	public MyProcess() {
+	
+	}
+
+	public MyProcess(String name, String jumin, String gender, Age age) {
+		super();
+		this.name = name;
+		this.jumin = jumin;
+		this.gender = gender;
+		this.age = age;
+	}
+	
+	
+}

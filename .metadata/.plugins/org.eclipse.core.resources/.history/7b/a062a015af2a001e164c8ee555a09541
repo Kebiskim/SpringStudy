@@ -1,0 +1,6 @@
+package ex04_DI;
+
+public class Age {
+	public int count(String jumin, int )
+	
+}

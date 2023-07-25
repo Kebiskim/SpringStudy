@@ -1,0 +1,9 @@
+package ex01_nonDI;
+
+public class MySQLDAO implements DAO {
+	@Override
+	public void prn() {
+		// TODO Auto-generated method stub
+		
+	}
+}

@@ -1,0 +1,6 @@
+package ex04_DI;
+
+public class MyProcess {
+	private String name;
+	
+}
