@@ -10,8 +10,46 @@
 	<bean id="mycalc" class="ex07_web_DI.MyCalc" /> -->
 	
 	<context:annotation-config />
+	<!-- 원래는 com.ict 까지 치면 아래 폴더들 모두 적용되는데, 이름이 달라서 번거롭게 작업중! -->
  	<context:component-scan base-package="ex06_web_DI" />
  	<context:component-scan base-package="ex07_web_DI" />
  	<context:component-scan base-package="ex08_web_annotation" />
+ 	<context:component-scan base-package="ex09_db" />
+ 	<context:component-scan base-package="ex10_guestbook" />
 	<!-- <context:component-scan base-package="/"></context:component-scan> -->
+	
+	
+	
+	<!-- 오라클 연결 정보 -->
+	<!-- SSFB or DMDS 이런식으로 치면 class 안에 제안 클래스들 나옴 => 클래스의 대문자만 침 (camel 표기법) -->
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- name="" 에서, setter 가진 모든 변수 조회 가능 -->
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="C##SW" />
+		<property name="password" value="1111" />
+	</bean>
+	
+	<!-- mybatis의 config 역할(오라클과 mybatis 연결, mapper 위치)  -->
+	<!-- id는 오른쪽 거 가져와서 맨앞만 소문자로 -->
+	<!-- jdbc만 가지고 접속할 때는 위에 dataSource 부분만 쓰면 되는데, mybatis 쓰기 때문에 가져와서 쓰면 된다! (위에꺼 두번 쓸필요 x) -->
+	<!-- 아래 ref가 dataSource라서, ★ Autowired 된다!! (name과 참조 변수가 동일하기 때문) -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:ex10_guestbook/mapper.xml" />
+	</bean>
+	
+	<!-- DAO에 사용할 SqlSessionTemplate 클래스를 객체로 만들자. -->
+	<!-- 기본생성자가 없어서, 안에 내용 없으면 오류 난다.  -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+	
+	<!-- DAO -->
+	<!-- dao id는 아무거나 하면 됨. -->
+	<!-- 이름이 같은 애들끼리 autowired 하자! -->
+	<!-- 아래부분을 주석처리 하면서, ★ annotation으로 변경하자! -->
+	<!-- <bean id="dao" class="ex09_db.DAO" autowire="byName" /> -->
+	
 </beans>
